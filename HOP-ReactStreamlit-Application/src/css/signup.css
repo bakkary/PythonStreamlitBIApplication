@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    font-family: "Arial", sans-serif;
+    height: 100vh;
+  }
+  
+  .box {
+    margin: 5em 21em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 60px 20px;
+    box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.5),
+      25px 35px 20px rgba(0, 0, 0, 0.5),
+      inset -20px -20px 25px rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    transition: 0.5s;
+  }
+  
+  .box input {
+    outline: none;
+    font-size: 16px;
+  }
+  
+  .box input[type="submit"] {
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .box div::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 65%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+  }
+  
+  .box button {
+    background-color: #ff0f5b;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    margin-left: 45%;
+  }
+  
+  #username, #useremail, #password, #confirmPassword, #diaryName {
+    width: 35%;
+    margin-bottom: 2em;
+  }
+
+  #useremail, #confirmPassword {
+    margin-left: 2em;
+  }
+  
+
+

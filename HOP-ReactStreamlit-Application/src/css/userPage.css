@@ -1,0 +1,59 @@
+.userflex {
+    display: grid;
+    grid-template-columns: 30% 67%;
+    gap: 3%;
+    height: 80vh;
+    margin: 3%;
+}
+
+.flex-item1 {
+    background-color: gray;
+    color: #fff;
+    padding: 10px;
+}
+
+.flex-item2 {
+    background-color: gray;
+    color: #fff;
+    padding: 10px;
+}
+
+.diary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto; /* Define the rows for the first two items */
+    gap: 10px; /* Adjust the gap between items if needed */
+  }
+
+
+.diary-items {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+
+.UP1UP3{
+    height: 50px;
+  }
+
+.UP2{
+    height: 100px;
+}
+
+.diary-item4 {
+    grid-column: span 2; 
+}
+
+.diary-box {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+input[type="submit"] {
+    margin-top: 50px;
+    padding: 8px;
+    cursor: pointer;
+}
