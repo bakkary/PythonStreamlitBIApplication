@@ -53,16 +53,7 @@ function App() {
                   <li><NavLink to="/question1" activeClassName="active">Question 1</NavLink></li>
                   <li><NavLink to="/question2" activeClassName="active">Question 2</NavLink></li>
                   <li><NavLink to="/question3" activeClassName="active">Question 3</NavLink></li>
-                  <li><NavLink to="/question4" activeClassName="active">Question 4</NavLink></li>
-                  <li><NavLink to="/question5" activeClassName="active">Question 5</NavLink></li>
-                  <li><NavLink to="/question6" activeClassName="active">Question 6</NavLink></li>
-                  <li><NavLink to="/question7" activeClassName="active">Question 7</NavLink></li>
-                  <li><NavLink to="/question8" activeClassName="active">Question 8</NavLink></li>
-                  <li><NavLink to="/question9" activeClassName="active">Question 9</NavLink></li>
-                  <li><NavLink to="/question10" activeClassName="active">Question 10</NavLink></li>
-                  <li><NavLink to="/question11" activeClassName="active">Question 11</NavLink></li>
-                  <li><NavLink to="/question12" activeClassName="active">Question 12</NavLink></li>
-                  <li><NavLink to="/question13" activeClassName="active">Question 13</NavLink></li>
+
                 </ul>
               )}
             </li>
@@ -100,16 +91,7 @@ function App() {
         <Route path="/question1" element={<Question1 />} />
         <Route path="/question2" element={<Question2 />} />
         <Route path="/question3" element={<Question3 />} />
-        <Route path="/question4" element={<Question4 />} />
-        <Route path="/question5" element={<Question5 />} />
-        <Route path="/question6" element={<Question6 />} />
-        <Route path="/question7" element={<Question7 />} />
-        <Route path="/question8" element={<Question8 />} />
-        <Route path="/question9" element={<Question9 />} />
-        <Route path="/question10" element={<Question10 />} />
-        <Route path="/question11" element={<Question11 />} />
-        <Route path="/question12" element={<Question12 />} />
-        <Route path="/question13" element={<Question13/>} />
+
     
       </Routes>
 
