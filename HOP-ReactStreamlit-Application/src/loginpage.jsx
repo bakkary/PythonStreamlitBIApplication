@@ -2,10 +2,7 @@ import React from "react";
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, NavLink, Routes} from 'react-router-dom';
 import facade from './util/apiFacade';
-import Signup from './signup';
-import "./css/index.css";
 import "./css/signup.css";
-import './css/App.css';
 
 function Login() {
 

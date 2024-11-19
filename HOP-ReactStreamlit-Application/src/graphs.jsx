@@ -1,61 +1,25 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, NavLink, Routes } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
 import './css/App.css';
-import Login from './loginpage';
-import Signup from './signup';
 import './css/userpage.css';
+import facade from './util/apiFacade';
 
-function App() {
-  const [applicationsCollapsed, setApplicationsCollapsed] = useState(true);
+function GraphsPage({ isAdmin, setIsAdmin }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [dataFromServer, setDataFromServer] = useState('Loading...');
 
-  const toggleQuestions = () => {
-    setQuestionsCollapsed((prevCollapsed) => !prevCollapsed);
-  };
+  useEffect(() => {
+    facade.fetchData('diary', 'GET').then((data) => setDataFromServer(data));
+  }, [isLoggedIn]);
 
-  const toggleApplications = () => {
-    setApplicationsCollapsed((prevCollapsed) => !prevCollapsed);
-  };
-
+ 
   return (
-
-    <div>
-    <Router>
-      <header>
-        <div className="menu-toggle" id="mobile-menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <nav className="nav">
-          <ul>
-            <li>
-          
-                <ul>
-                   <li><NavLink to="/" activeClassName="active">Home</NavLink></li>
-                  <li><NavLink to="/loginpage" activeClassName="active">Login</NavLink></li>
-                  <li><NavLink to="/signup" activeClassName="active">Signup</NavLink></li>
-                </ul>
-            </li>
-          </ul>
-        </nav>
-      </header>
-
-      <Routes>
-        <Route path="/loginpage" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-
-      </Routes>
-
-    </Router>
-
     <div className="userflex">
       <div className="flex-item1">
         <h3>diary (hashmapp)</h3>
       </div>
 
       <div className="user-flex-item flex-item2">
-        
+        ) : (
           <div className="diary">
             
             <div className="diary-items diary-item1">
@@ -94,11 +58,6 @@ function App() {
       </div>
     </div>
   );
-
-
-    </div>
-
-  );
 }
 
-export default App;
+export default GraphsPage;
