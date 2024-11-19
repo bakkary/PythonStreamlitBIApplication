@@ -19,14 +19,9 @@ function UserPage({ isAdmin, setIsAdmin }) {
       </div>
 
       <div className="user-flex-item flex-item2">
-        {isAdmin ? (
-          <div className="admin-content">
-            {/* Admin-specific content goes here */}
-            <p>Welcome, Admin!</p>
-          </div>
         ) : (
           <div className="diary">
-            {/* User-specific content goes here */}
+            
             <div className="diary-items diary-item1">
               <form action="userpage.php" method="post">
                 <input type="text" name="date" placeholder="Date" className="UP1UP3" />
@@ -59,7 +54,7 @@ function UserPage({ isAdmin, setIsAdmin }) {
               </form>
             </div>
           </div>
-        )}
+        
       </div>
     </div>
   );
