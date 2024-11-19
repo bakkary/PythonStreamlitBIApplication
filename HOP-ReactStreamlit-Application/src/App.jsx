@@ -55,7 +55,7 @@ function App() {
       </div>
 
       <div className="user-flex-item flex-item2">
-        ) : (
+        
           <div className="diary">
             
             <div className="diary-items diary-item1">
