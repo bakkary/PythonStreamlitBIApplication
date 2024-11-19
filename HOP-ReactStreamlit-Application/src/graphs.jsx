@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './css/App.css';
-import './css/userpage.css';
+import './css/graphs.css';
 import facade from './util/apiFacade';
 
 function GraphsPage({ isAdmin, setIsAdmin }) {
@@ -14,12 +14,10 @@ function GraphsPage({ isAdmin, setIsAdmin }) {
  
   return (
     <div className="userflex">
-      <div className="flex-item1">
-        <h3>diary (hashmapp)</h3>
-      </div>
+
 
       <div className="user-flex-item flex-item2">
-        ) : (
+
           <div className="diary">
             
             <div className="diary-items diary-item1">

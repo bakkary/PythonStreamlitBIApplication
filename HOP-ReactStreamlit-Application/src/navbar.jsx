@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, NavLink, Routes } from 'react-router-do
 import './css/App.css';
 import Login from './loginpage';
 import Signup from './signup';
-import './css/userpage.css';
 import GraphsPage from './graphs';
 
 function Navbar() {

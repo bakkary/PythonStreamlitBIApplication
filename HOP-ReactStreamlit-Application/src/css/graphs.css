@@ -1,6 +1,6 @@
 .userflex {
     display: grid;
-    grid-template-columns: 30% 67%;
+    grid-template-columns: 100%;
     gap: 3%;
     height: 80vh;
     margin: 3%;
