@@ -38,11 +38,12 @@ function GraphsPage({ isAdmin, setIsAdmin }) {
           <div className="diary-items diary-item4">
             <label htmlFor="streamlitApp">Streamlit Application</label>
             {streamlitAvailable ? (
+            
               <iframe
-                className="diary-box"
-                id="streamlitApp"
-                src={STREAMLIT_URL}
-                title="Streamlit Application"
+              className="diary-box"
+              id="streamlitApp"
+              src="http://localhost:8501"
+              title="Streamlit Application"
               ></iframe>
             ) : (
               <p>Streamlit application is currently unavailable.</p>

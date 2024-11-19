@@ -26,7 +26,6 @@ app.use(
     },
   })
 );
-
 // Fallback to React for all other routes (must come after /streamlit proxy)
 app.get("*", (req, res) => {
   res.sendFile(path.join(distPath, "index.html"));
