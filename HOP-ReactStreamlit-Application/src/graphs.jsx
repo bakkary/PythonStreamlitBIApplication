@@ -1,58 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import './css/App.css';
-import './css/graphs.css';
-import facade from './util/apiFacade';
+import React, { useState, useEffect } from "react";
+import "./css/App.css";
+import "./css/graphs.css";
+
+const STREAMLIT_URL = "/streamlit";
 
 function GraphsPage({ isAdmin, setIsAdmin }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [dataFromServer, setDataFromServer] = useState('Loading...');
+  const [streamlitAvailable, setStreamlitAvailable] = useState(true);
 
+  // Check if the Streamlit app is reachable
   useEffect(() => {
-    facade.fetchData('diary', 'GET').then((data) => setDataFromServer(data));
-  }, [isLoggedIn]);
+    fetch(STREAMLIT_URL)
+      .then((response) => {
+        if (!response.ok) throw new Error("Streamlit unavailable");
+      })
+      .catch(() => setStreamlitAvailable(false));
+  }, []);
 
- 
   return (
     <div className="userflex">
-
-
       <div className="user-flex-item flex-item2">
-
-          <div className="diary">
-            
-            <div className="diary-items diary-item1">
-              <form action="userpage.php" method="post">
-                <input type="text" name="date" placeholder="Date" className="UP1UP3" />
-              </form>
-            </div>
-
-            <div className="diary-items diary-item2">
-              <form action="userpage.php" method="post">
-                <input type="text" name="mood" placeholder="pick your mood" className="UP2" />
-              </form>
-            </div>
-
-            <div className="diary-items diary-item3">
-              <form action="userpage.php" method="post">
-                <input type="text" name="topic" placeholder="todays topic" className="UP1UP3" />
-              </form>
-            </div>
-
-            <div className="diary-items diary-item4">
-              <form>
-                <label htmlFor="multilineInput">write your diary here</label>
-                <textarea
-                  className="diary-box"
-                  id="multilineInput"
-                  name="multilineInput"
-                  rows="40"
-                  cols="50"
-                ></textarea>
-                <input type="submit" value="save page in diary" />
-              </form>
-            </div>
+        <div className="diary">
+          <div className="diary-items diary-item1">
+            <form>
+              <input type="text" name="date" placeholder="Date" className="UP1UP3" />
+            </form>
           </div>
-        
+          <div className="diary-items diary-item2">
+            <form>
+              <input type="text" name="mood" placeholder="Pick your mood" className="UP2" />
+            </form>
+          </div>
+          <div className="diary-items diary-item3">
+            <form>
+              <input type="text" name="topic" placeholder="Today's topic" className="UP1UP3" />
+            </form>
+          </div>
+          <div className="diary-items diary-item4">
+            <label htmlFor="streamlitApp">Streamlit Application</label>
+            {streamlitAvailable ? (
+              <iframe
+                className="diary-box"
+                id="streamlitApp"
+                src={STREAMLIT_URL}
+                title="Streamlit Application"
+              ></iframe>
+            ) : (
+              <p>Streamlit application is currently unavailable.</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

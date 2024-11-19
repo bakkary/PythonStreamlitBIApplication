@@ -4,13 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node server.js",
+    "vite-dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "dom": "^0.0.3",
+    "express": "^4.21.1",
+    "http-proxy-middleware": "^3.0.3",
     "login-app": "file:",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
