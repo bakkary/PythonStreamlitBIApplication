@@ -18,19 +18,6 @@
     padding: 10px;
 }
 
-.diary {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto; /* Define the rows for the first two items */
-    gap: 10px; /* Adjust the gap between items if needed */
-  }
-
-
-.diary-items {
-    padding: 10px;
-    box-sizing: border-box;
-}
-
 
 
 .UP1UP3{
@@ -39,10 +26,6 @@
 
 .UP2{
     height: 100px;
-}
-
-.diary-item4 {
-    grid-column: span 2; 
 }
 
 .diary-box {

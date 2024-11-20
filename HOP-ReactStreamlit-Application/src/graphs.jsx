@@ -9,8 +9,7 @@ function GraphsPage() {
   return (
     <div className="userflex">
       <div className="user-flex-item flex-item2">
-        <div className="diary">
-          <div className="diary-items diary-item4">
+
             <label htmlFor="streamlitApp">Streamlit Application</label>
               <iframe
               className="diary-box"
@@ -19,8 +18,6 @@ function GraphsPage() {
               title="Streamlit Application"
               ></iframe>
           </div>
-        </div>
-      </div>
     </div>
   );
 }

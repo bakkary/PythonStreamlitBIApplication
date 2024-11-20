@@ -58,7 +58,6 @@ function Signup({ setUser }) {
           <input placeholder="User email" id="useremail" ref={useremail} />
           <input placeholder="Password" type="password" id="password" ref={password} />
           <input placeholder="Confirm password" type="password" id="confirmPassword" ref={confirmPassword} />
-          <input placeholder="Diary name" id="diaryName" ref={diaryName} />
           <button onClick={performSignup}>Sign up</button>
           <NavLink to="/loginpage" activeClassName="active"><button className="btns">Login</button></NavLink>
         </form>
