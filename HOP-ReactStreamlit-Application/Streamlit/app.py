@@ -8,4 +8,4 @@ st.markdown("""
 This application demonstrates:
 1. Dataset Upload and Interaction
 2. Interactive Visualization with PyGWalker
-""")
+""")  
