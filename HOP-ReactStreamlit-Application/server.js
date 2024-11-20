@@ -15,6 +15,18 @@ const app = express();
 const distPath = path.resolve(__dirname, "dist");
 app.use(express.static(distPath));
 
+// Proxy requests to FastAPI
+app.use(
+  "/api",
+  createProxyMiddleware({
+    target: "http://localhost:8000/docs", // FastAPI backend URL
+    changeOrigin: true,
+    pathRewrite: {
+      "^/api": "", // Remove "/api" from forwarded path
+    },
+  })
+);
+
 // Proxy requests to Streamlit
 app.use(
   "/streamlit",
@@ -26,7 +38,8 @@ app.use(
     },
   })
 );
-// Fallback to React for all other routes (must come after /streamlit proxy)
+
+// Fallback to React for all other routes (must come after proxies)
 app.get("*", (req, res) => {
   res.sendFile(path.join(distPath, "index.html"));
 });
@@ -35,7 +48,7 @@ app.get("*", (req, res) => {
 const runViteApp = () => {
   console.log("Starting Vite app...");
   const viteProcess = spawn("npm", ["run", "vite-dev"], {
-    cwd: __dirname, // Ensure this is the root directory
+    cwd: __dirname,
     stdio: "inherit",
     shell: true,
   });
@@ -52,7 +65,7 @@ const runStreamlitApp = () => {
     "streamlit",
     ["run", "app.py", "--server.enableCORS=false", "--server.enableXsrfProtection=false"],
     {
-      cwd: path.resolve(__dirname, "streamlit"), // Adjust if your Streamlit app is in a subdirectory
+      cwd: path.resolve(__dirname, "streamlit"),
       stdio: "inherit",
       shell: true,
     }
@@ -63,12 +76,27 @@ const runStreamlitApp = () => {
   });
 };
 
+// Function to start the FastAPI app
+const runFastAPIApp = () => {
+  console.log("Starting FastAPI backend...");
+  const fastAPIProcess = spawn("uvicorn", ["main:app", "--host", "0.0.0.0", "--port", "8000"], {
+    cwd: path.resolve(__dirname, "backend"), // Adjust this to the FastAPI backend directory
+    stdio: "inherit",
+    shell: true,
+  });
+
+  fastAPIProcess.on("close", (code) => {
+    console.log(`FastAPI app exited with code ${code}`);
+  });
+};
+
 // Start Express server
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
-// Start both apps
+// Start all apps
 runViteApp();
 runStreamlitApp();
+runFastAPIApp();
