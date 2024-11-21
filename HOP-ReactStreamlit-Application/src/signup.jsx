@@ -7,19 +7,20 @@ import "./css/signup.css";
 function Signup({ setUser }) {
   const init = { username: "", password: "", confirmPassword: "", useremail: "" };
   const [signupData, setSignupData] = useState(init);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(""); // Added success state
 
   const performSignup = async (evt) => {
     evt.preventDefault();
 
     // Validate passwords match
     if (signupData.password !== signupData.confirmPassword) {
-      setError("Passwords do not match");
+      setError("Passwords do not match.");
       return;
     }
 
     try {
-      const response = await fetch("/api/signup", {
+      const response = await fetch("http://localhost:8000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,16 +32,16 @@ function Signup({ setUser }) {
         }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        setError(errorData.detail || "Error during signup. Please try again.");
-        return;
+      if (response.ok) {
+        setSuccess("Signup successful!");
+        setError("");
+        setSignupData(init); // Clear form data on success
+      } else {
+        const errorData = await response.json().catch(() => ({ detail: "Unknown error" }));
+        setError(errorData.detail || "An error occurred.");
       }
-
-      setError(false); // Clear errors
-      setUser(signupData.username); // Assuming signup is successful
     } catch (error) {
-      setError("Error connecting to the server. Please try again.");
+      setError("Error connecting to the server.");
       console.error(error);
     }
   };
@@ -94,6 +95,7 @@ function Signup({ setUser }) {
       </form>
 
       {error && <p className="error-message">{error}</p>}
+      {success && <p className="success-message">{success}</p>} {/* Show success message */}
     </div>
   );
 }

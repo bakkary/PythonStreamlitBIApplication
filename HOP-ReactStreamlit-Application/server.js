@@ -2,24 +2,11 @@ import { spawn } from "child_process";
 import path from "path";
 import { fileURLToPath } from "url";
 import express from "express";
-import { createProxyMiddleware } from "http-proxy-middleware";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-
-// Proxy requests to FastAPI
-app.use(
-  "/api",
-  createProxyMiddleware({
-    target: "http://localhost:8000", // FastAPI backend URL
-    changeOrigin: true,
-    pathRewrite: {
-      "^/api": "", // Remove "/api" from forwarded path
-    },
-  })
-);
 
 // Serve React static files
 const distPath = path.resolve(__dirname, "dist");
@@ -35,6 +22,7 @@ app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
+// Start React (Vite), FastAPI, and Streamlit
 const runViteApp = () => {
   console.log("Starting Vite app...");
   const viteProcess = spawn("npm", ["run", "vite-dev"], {
