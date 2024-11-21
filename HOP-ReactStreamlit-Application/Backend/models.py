@@ -12,6 +12,16 @@ class Item(Base):
     name = Column(String, index=True)
     description = Column(String, nullable=True)
 
+
+# User model
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
+    password = Column(String, nullable=False)
+
+
 # Database setup
 DATABASE_URL = "sqlite:///./test.db"  # SQLite database
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
