@@ -1,5 +1,6 @@
 # PythonStreamlitBIApplication
 
-pip install numpy==1.24.4
-npm install 
+how to run
+cd HOP-ReactStreamlit-Application/
+npm install
 npm run dev
