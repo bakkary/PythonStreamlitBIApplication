@@ -3,7 +3,6 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel, EmailStr
 from passlib.context import CryptContext
 from models import Base, User, Item, SessionLocal, engine
-from fastapi.security import OAuth2PasswordRequestForm
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -85,7 +84,7 @@ def signup(user: UserSignup, db: Session = Depends(get_db)):
 
 
 
-# Login endpoint
+
 
 @app.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
