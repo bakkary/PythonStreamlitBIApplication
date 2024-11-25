@@ -15,22 +15,44 @@ function Login() {
   useEffect(() => {
     facade.fetchData("diary", "GET").then((data) => setDataFromServer(data));
   }, [isLoggedIn]);
-
-  const performLogin = (evt) => {
+  const performLogin = async (evt) => {
     evt.preventDefault();
-    facade.login(
-      loginCredentials.username,
-      loginCredentials.password,
-      setIsLoggedIn
-    );
-  };
- 
+
+    try {
+        await facade.login(loginCredentials.username, loginCredentials.password);
+        setIsLoggedIn(true); // Update login state on success
+        setDataFromServer("Welcome back!"); // Dummy data for now
+    } catch (error) {
+        console.error("Login failed:", error);
+        setDataFromServer("Login failed. Please try again.");
+    }
+};
   const onChange = (evt) => {
     setLoginCredentials({
       ...loginCredentials,
       [evt.target.id]: evt.target.value,
     });
   };
+
+  const login = async (username, password) => {
+  const payload = new URLSearchParams({ username, password });
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: payload,
+  };
+
+  const response = await fetch("http://localhost:8000/login", options);
+  if (!response.ok) {
+    throw new Error("Login failed");
+  }
+  const data = await response.json();
+  console.log(data.access_token); // Save token as needed
+  return data;
+};
+
 
   return (
  
