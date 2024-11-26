@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom"; // Import useNavigate
 import "./css/App.css";
 import "./css/index.css";
 import "./css/signup.css";
@@ -8,7 +8,8 @@ function Signup({ setUser }) {
   const init = { username: "", password: "", confirmPassword: "", useremail: "" };
   const [signupData, setSignupData] = useState(init);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(""); // Added success state
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const performSignup = async (evt) => {
     evt.preventDefault();
@@ -36,6 +37,7 @@ function Signup({ setUser }) {
         setSuccess("Signup successful!");
         setError("");
         setSignupData(init); // Clear form data on success
+        setTimeout(() => navigate("/loginpage"), 2000); // Redirect to login page after 2 seconds
       } else {
         const errorData = await response.json().catch(() => ({ detail: "Unknown error" }));
         setError(errorData.detail || "An error occurred.");
