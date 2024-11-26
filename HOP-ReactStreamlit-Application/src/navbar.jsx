@@ -4,6 +4,7 @@ import "./css/App.css";
 import Login from "./loginpage";
 import Signup from "./signup";
 import GraphsPage from "./graphs";
+import logo from './util/images/logo.png';
 
 function Navbar() {
   const [applicationsCollapsed, setApplicationsCollapsed] = useState(true);
@@ -25,7 +26,7 @@ function Navbar() {
                     to="/graphs"
                     className={({ isActive }) => (isActive ? "active" : "")}
                   >
-                    Home
+                    <img src={logo} alt="Logo" />
                   </NavLink>
                 </li>
                 <li>
