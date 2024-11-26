@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel, EmailStr
 from passlib.context import CryptContext
 from models import Base, User, Item, SessionLocal, engine
+from fastapi.security import OAuth2PasswordRequestForm
+
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -94,6 +96,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     # Validate user existence and password
     if not user or user.password != form_data.password:
         raise HTTPException(status_code=401, detail="Invalid username or password")
+        
 
     # For simplicity, return a dummy token (adjust for JWT if needed)
     return {"access_token": "fake-token-for-demo", "token_type": "bearer"}
