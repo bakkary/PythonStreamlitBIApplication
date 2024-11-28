@@ -35,6 +35,10 @@ else:
     st.warning("Please upload a CSV file to proceed.")
     df = pd.DataFrame()  # Fallback to an empty DataFrame
 
+
+
+
+
 # Display PyGWalker visualization
 if not df.empty:
     try:
