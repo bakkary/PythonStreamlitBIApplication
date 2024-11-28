@@ -21,12 +21,12 @@ function Navbar() {
           <ul>
             <li>
               <ul>
-                <li>
+                <li> 
                   <NavLink
                     to="/graphs"
                     className={({ isActive }) => (isActive ? "active" : "")}
                   >
-                    <img src={logo} alt="Logo" />
+                    <img id="logo" src={logo} alt="Logo" />
                   </NavLink>
                 </li>
                 <li>

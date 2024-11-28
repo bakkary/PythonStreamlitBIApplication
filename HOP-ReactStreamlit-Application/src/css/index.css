@@ -7,8 +7,7 @@ body {
   margin: 0;
   font-family: "Arial", sans-serif;
   height: 100vh;
-  /*cursor: url('./cursor/beeshe.png') 16 16, auto;
-  */
+
 }
 
 .box:hover {
@@ -130,15 +129,13 @@ header {
   margin: 6px 0;
 }
 
-.nav {
-  display: flex;
-}
 
 .nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
+  align-items: center;
 }
 
 .nav li {
