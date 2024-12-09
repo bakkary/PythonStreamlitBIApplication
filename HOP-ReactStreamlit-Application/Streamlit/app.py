@@ -1,8 +1,8 @@
 import streamlit as st
 
-st.set_page_config(page_title="Multi-Page Streamlit App", layout="wide")
+st.set_page_config(page_title="Sulti-Page Streamlit App", layout="wide")
 
-st.title("Welcome to the Multi-Page Streamlit App!")
+st.title("Welcome to the Single-Page Streamlit App!")
 
 st.markdown("""
 This application demonstrates:

@@ -29,6 +29,7 @@ function Navbar() {
                     <img id="logo" src={logo} alt="Logo" />
                   </NavLink>
                 </li>
+                <div className="mleft">
                 <li>
                   <NavLink
                     to="/loginpage"
@@ -37,6 +38,8 @@ function Navbar() {
                     Login
                   </NavLink>
                 </li>
+                </div>
+                <div>
                 <li>
                   <NavLink
                     to="/signup"
@@ -45,6 +48,7 @@ function Navbar() {
                     Signup
                   </NavLink>
                 </li>
+                </div>
               </ul>
             </li>
           </ul>
