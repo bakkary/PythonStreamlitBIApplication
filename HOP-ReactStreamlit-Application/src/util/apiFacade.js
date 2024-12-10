@@ -41,7 +41,7 @@ function apiFacade() {
         return fetch(URL + endpoint, options).then(handleHttpErrors);
     };
 
-    const makeOptions = (method, payload, addToken = false, isFormData = false) => {
+    const makeOptions = (method, payload, isFormData = false) => {
         const opts = {
             method: method,
             headers: {
