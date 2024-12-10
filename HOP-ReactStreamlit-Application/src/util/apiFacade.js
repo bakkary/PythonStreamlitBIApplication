@@ -1,7 +1,6 @@
 const URL = 'http://localhost:8000'; // Update to your FastAPI server's base URL
 const AUTHENTICATION_ROUTE = "/login";
 const SIGNUP_ROUTE = "/signup";
-const ITEMS_ROUTE = "/items"; // Example CRUD route for items
 
 function apiFacade() {
     const handleHttpErrors = async (res) => {

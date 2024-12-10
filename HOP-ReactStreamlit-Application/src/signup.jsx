@@ -13,8 +13,7 @@ function Signup({ setUser }) {
 
   const performSignup = async (evt) => {
     evt.preventDefault();
-
-    // Validate passwords match
+     // Validate passwords match
     if (signupData.password !== signupData.confirmPassword) {
       setError("Passwords do not match.");
       return;
