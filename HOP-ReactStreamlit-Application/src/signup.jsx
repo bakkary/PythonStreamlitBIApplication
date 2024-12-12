@@ -9,7 +9,6 @@ function Signup({ setUser }) {
   const [signupData, setSignupData] = useState(init);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate
 
   const performSignup = async (evt) => {
     evt.preventDefault();

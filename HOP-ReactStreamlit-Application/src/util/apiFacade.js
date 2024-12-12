@@ -37,7 +37,7 @@ function apiFacade() {
     };
 
     const fetchData = (endpoint, method = "GET", payload = null) => {
-        const options = makeOptions(method, payload); // No token needed
+        const options = makeOptions(method, payload); 
         return fetch(URL + endpoint, options).then(handleHttpErrors);
     };
 
