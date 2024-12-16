@@ -1,33 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import facade from "./util/apiFacade";
 import "./css/signup.css";
 
-function Login() {
+function Login({ setIsLoggedIn }) {
   const init = { username: "", password: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [dataFromServer, setDataFromServer] = useState("Loading...");
-  const navigate = useNavigate(); // Initialize useNavigate
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      facade.fetchData("diary", "GET").then((data) => setDataFromServer(data));
-    }
-  }, [isLoggedIn]);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const performLogin = async (evt) => {
     evt.preventDefault();
 
     try {
-      await facade.login(loginCredentials.username, loginCredentials.password);
-      setIsLoggedIn(true); // Update login state on success
-      setDataFromServer("Welcome back!"); // Dummy data for now
-      navigate("/"); // Redirect to the main page on success
-    } catch (error) {
-      console.error("Login failed:", error);
-      setDataFromServer("Login failed. Please try again.");
+      const success = await facade.login(
+        loginCredentials.username,
+        loginCredentials.password
+      );
+      if (success) {
+        setIsLoggedIn(true); // Update login state in parent component
+        navigate("/graphs"); // Navigate to graphs on successful login
+      } else {
+        setError("Login failed. Please check your credentials.");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError(err.fullError?.detail || "Login failed. Please try again.");
     }
   };
 
@@ -38,36 +36,31 @@ function Login() {
     });
   };
 
-  const login = async (username, password) => {
-    const payload = new URLSearchParams({ username, password });
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: payload,
-    };
-
-    const response = await fetch("http://localhost:8000/login", options);
-    if (!response.ok) {
-      throw new Error("Login failed");
-    }
-    const data = await response.json();
-    console.log(data.access_token);
-    return data;
-  };
-
   return (
     <div className="box">
       <h1>Login</h1>
-      <form onChange={onChange}>
-        <input placeholder="Username" id="username" value={loginCredentials.username} />
-        <input placeholder="Password" id="password" value={loginCredentials.password} type="password" />
-        <button onClick={performLogin}>Login</button>
-        <NavLink to="/signup" activeClassName="active">
-          <button className="btns">Signup</button>
+      <form>
+        <input
+          placeholder="Username"
+          id="username"
+          value={loginCredentials.username}
+          onChange={onChange}
+        />
+        <input
+          placeholder="Password"
+          id="password"
+          value={loginCredentials.password}
+          onChange={onChange}
+          type="password"
+        />
+        <button type="button" onClick={performLogin}>
+          Login
+        </button>
+        <NavLink to="/signup" className="btns">
+          Signup
         </NavLink>
       </form>
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 }

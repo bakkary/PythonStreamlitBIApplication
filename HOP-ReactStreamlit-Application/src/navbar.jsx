@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Route, Routes } from "react-router-dom"; // Updated imports
+import { NavLink, Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import "./css/App.css";
 import Login from "./loginpage";
 import Signup from "./signup";
@@ -7,7 +7,13 @@ import GraphsPage from "./graphs";
 import logo from './util/images/logo.png';
 
 function Navbar() {
-  const [applicationsCollapsed, setApplicationsCollapsed] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    navigate("/loginpage"); // Redirect to login after logout
+  };
 
   return (
     <div>
@@ -21,33 +27,42 @@ function Navbar() {
           <ul>
             <li>
               <ul>
-                <li> 
+                <li>
                   <NavLink
-                    to="/graphs"
+                    to={isLoggedIn ? "/graphs" : "/loginpage"}
                     className={({ isActive }) => (isActive ? "active" : "")}
                   >
                     <img id="logo" src={logo} alt="Logo" />
                   </NavLink>
                 </li>
                 <div className="mleft">
-                <li>
-                  <NavLink
-                    to="/loginpage"
-                    className={({ isActive }) => (isActive ? "active" : "")}
-                  >
-                    Login
-                  </NavLink>
-                </li>
-                </div>
-                <div>
-                <li>
-                  <NavLink
-                    to="/signup"
-                    className={({ isActive }) => (isActive ? "active" : "")}
-                  >
-                    Signup
-                  </NavLink>
-                </li>
+                  {!isLoggedIn && (
+                    <li>
+                      <NavLink
+                        to="/loginpage"
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                      >
+                        Login
+                      </NavLink>
+                    </li>
+                  )}
+                  {!isLoggedIn && (
+                    <li>
+                      <NavLink
+                        to="/signup"
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                      >
+                        Signup
+                      </NavLink>
+                    </li>
+                  )}
+                  {isLoggedIn && (
+                    <li>
+                      <button onClick={handleLogout} className="logout-button">
+                        Logout
+                      </button>
+                    </li>
+                  )}
                 </div>
               </ul>
             </li>
@@ -56,9 +71,20 @@ function Navbar() {
       </header>
 
       <Routes>
-        <Route path="/" element={<GraphsPage />} />
-        <Route path="/graphs" element={<GraphsPage />} />
-        <Route path="/loginpage" element={<Login />} />
+        {/* Conditional rendering for the GraphsPage */}
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? <GraphsPage isLoggedIn={isLoggedIn} /> : <Navigate to="/loginpage" />
+          }
+        />
+        <Route
+          path="/graphs"
+          element={
+            isLoggedIn ? <GraphsPage isLoggedIn={isLoggedIn} /> : <Navigate to="/loginpage" />
+          }
+        />
+        <Route path="/loginpage" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom"; // Import useNavigate
+import { NavLink, useNavigate } from "react-router-dom";
+import facade from "./util/apiFacade"; // Import the apiFacade
 import "./css/App.css";
 import "./css/index.css";
 import "./css/signup.css";
@@ -9,7 +10,7 @@ function Signup({ setUser }) {
   const [signupData, setSignupData] = useState(init);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const performSignup = async (evt) => {
     evt.preventDefault();
@@ -21,30 +22,22 @@ function Signup({ setUser }) {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: signupData.username,
-          password: signupData.password,
-          email: signupData.useremail,
-        }),
-      });
+      // Use facade.signup to make the API call
+      const success = await facade.signup(
+        signupData.username,
+        signupData.password,
+        signupData.useremail
+      );
 
-      if (response.ok) {
+      if (success) {
         setSuccess("Signup successful!");
         setError("");
         setSignupData(init); // Clear form data on success
-        setTimeout(() => navigate("/loginpage"), 2000); // Redirect to login page after 2 seconds
-      } else {
-        const errorData = await response.json().catch(() => ({ detail: "Unknown error" }));
-        setError(errorData.detail || "An error occurred.");
+        setTimeout(() => navigate("/loginpage"), 1000); // Redirect to login page after 1 second
       }
-    } catch (error) {
-      setError("Error connecting to the server.");
-      console.error(error);
+    } catch (err) {
+      console.error("Signup error:", err);
+      setError(err.fullError?.detail || "An error occurred during signup.");
     }
   };
 
@@ -97,7 +90,7 @@ function Signup({ setUser }) {
       </form>
 
       {error && <p className="error-message">{error}</p>}
-      {success && <p className="success-message">{success}</p>} {/* Show success message */}
+      {success && <p className="success-message">{success}</p>}
     </div>
   );
 }

@@ -1,5 +1,4 @@
 const URL = 'http://localhost:8000'; // Update to your FastAPI server's base URL
-const DIARY_ROUTE = "/diary";
 const AUTHENTICATION_ROUTE = "/login";
 const SIGNUP_ROUTE = "/signup";
 
