@@ -55,3 +55,12 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
+.paddR{
+padding-right: 35em;
+
+}
+
+.marrR{
+margin-right: 7em;
+}

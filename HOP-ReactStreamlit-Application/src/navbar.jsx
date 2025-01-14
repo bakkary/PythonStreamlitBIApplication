@@ -21,7 +21,7 @@ function Navbar() {
           <ul>
             <li>
               <ul>
-                <li> 
+                <li className = "paddR"> 
                   <NavLink
                     to="/graphs"
                     className={({ isActive }) => (isActive ? "active" : "")}
@@ -30,7 +30,7 @@ function Navbar() {
                   </NavLink>
                 </li>
                 <div className="mleft">
-                <li>
+                <li className = "marrR">
                   <NavLink
                     to="/loginpage"
                     className={({ isActive }) => (isActive ? "active" : "")}
